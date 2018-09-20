@@ -3,42 +3,32 @@ public class Solution
     final static int PASS = 50;  
     public static void main(String[] args)
     {
-        int[] input = { 80, 90, 40, 32, 65, 55, 30, 45, 75 };
+        int[] input = { 80, 90, 40, 32, 10, 20, 30, 65, 55, 30, 45, 75 };
 
-        int swapIndex;
+        int swapIndex = 0;
 
         for (int i = 0; i < input.length; i++) {
             
-            int current = input[i];
-            if (current < PASS) {
-                swapIndex = getSwapIndex(input, i);
-                
-                if (swapIndex == 0) {
-                    // Nothing to swap, we're done.
-                    break;
-                }
-                else {
-                    // Swap the fail, with the next pass.
-                    input[i] = input[swapIndex];
-                    input[swapIndex] = current;
-                }
+            if (input[i] > PASS) {
+
+                doSwap(input, i, swapIndex++);               
             }
         }
         
-        // Print out input.
-        for (int i : input )
+        // Verify input.
+        for (int i : input) {
     	    System.out.println(i);
+	}
     }
     
-    public static int getSwapIndex(int[] input, int startSearch) {
-    
-        for (int i = startSearch; i < input.length; i++) {
-            
-            if (input[i] >= PASS) {
-                return i;
-            }
+    public static void doSwap(int[] input, int current, int swapIndex) {
+        
+        if (current == swapIndex) {
+            return;
         }
-        return 0;
-  }
-  
+        
+        int temp = input[current];
+        input[current] = input[swapIndex];
+        input[swapIndex] = temp;
+    }
 }
